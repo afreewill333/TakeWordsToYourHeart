@@ -54,15 +54,20 @@ public class TakeWordsToYourHeart {
 		}
 
 		//step 3
-		for(int i=0;i<Math.ceil(1.*unitcount/teamcount);i++){
-			List dayplan = (List<List>)plans.get(i); 
-			List newunit = (List)dayplan.get(dayplan.size()-1);
-			for(int p=1;p<ruler.size();p++){
-				int diff = ruler.get(p)-1;
-				List<List> newdays = (List<List>)plans.get(i+diff);
-				newdays.add(0,newunit);
+		for(int i=0;i<plans.size();i++){
+			List dayplan = (List)plans.get(i);//List<List> 
+			int count=0;
+			for(int j=0;j<dayplan.size()-1;j++){
+				List team = (List)dayplan.get(j);
+				count+=team.size();
 			}
-			System.out.println();
+			if(count>threshold){
+				System.out.println("The unit number of "+(i+1)+"day beyond the threshold!");
+				plans.add(i,dayplan);
+				i++;
+				System.out.println("The same dayplan has been inserted into plans after it!");
+				System.out.println("Now the dayplan of "+(i)+" and "+(i+1)+" should be the same!");
+			}
 
 		}
 
